@@ -24,9 +24,6 @@ router.get("/", (req, res, next) => {
 
 //  GET the Product Details page in order to add a new Product
 router.get("/add", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
   product.find((err, products) => {
     res.render("products/add", {
       title: "Add product",
@@ -37,9 +34,21 @@ router.get("/add", (req, res, next) => {
 
 // POST process the Product Details page and create a new Product - CREATE
 router.post("/add", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let newProduct = product({
+    Productname: req.body.Productname,
+    Productid: req.body.Productid,
+    Description: req.body.Description,
+    Price: req.body.Price,
+  });
+
+  product.create(newProduct, (err, product) => {
+    if (err) {
+      console.error(err);
+      res.end(err);
+    } else {
+      res.redirect("/products");
+    }
+  });
 });
 
 // GET the Product Details page in order to edit an existing Product
@@ -64,9 +73,24 @@ router.get("/:id", (req, res, next) => {
 
 // POST - process the information passed from the details form and update the document
 router.post("/:id", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
+  let id = req.params.id;
+
+  let updatedProduct = product({
+    _id: id,
+    Productname: req.body.Productname,
+    Productid: req.body.Productid,
+    Description: req.body.Description,
+    Price: req.body.Price,
+  });
+
+  product.updateOne({ _id: id }, updatedProduct, (err) => {
+    if (err) {
+      console.error(err);
+      res.end(err);
+    } else {
+      res.redirect("/products");
+    }
+  });
 });
 
 // GET - process the delete
