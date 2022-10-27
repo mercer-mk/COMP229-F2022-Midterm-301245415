@@ -34,6 +34,7 @@
                 <!-- ------------------------ -->
                 <!-- ADD the EDIT BUTTON HERE -->
                 <!-- ------------------------ -->
+
                 <a href="/products/<%= products[count]._id %>" class="btn btn-primary btn-small">
                   <i class="fas fa-pencil-alt"></i>Edit
                 </a>
@@ -47,9 +48,34 @@
       <!-- ------------------------ -->
       <!-- ADD the DELETE BUTTON HERE -->
       <!-- ------------------------ -->
-      <a href="/products/delete" class="btn btn-warning btn-sm">
-        Delete</a>
-      </main>
+
+      <form class="row" method="get" action="/products/delete">
+        <div class="form-group col-md-6">
+
+          <input type="text" class="form-control" id="NameDeteteTextField"
+            placeholder="Please Enter Product name to delete" name="Productnamedelete" />
+        </div>
+
+        <button class="btn btn-warning btn-sm" type="submit">
+          Delete</button>
+      </form>
+
+
+      <form method="get" class="row" action="/products/delete">
+        <div class="form-group col-md-3">
+          <input type="text" class="form-control" id="LowRangeTextField" placeholder="Low" name="LowPrice" />
+        </div>
+        <div class="form-group col-md-3">
+          <input type="text" class="form-control" id="HighRangeTextField" placeholder="High" name="HighPrice" />
+        </div>
+
+        <button class="btn btn-warning btn-sm" type="submit">
+          Delete</button>
+      </form>
+
+
+
+
 
 
       <div class="col-md-offset-1 col-md-10 text-center">

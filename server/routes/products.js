@@ -51,11 +51,35 @@ router.post("/add", (req, res, next) => {
   });
 });
 
+// GET - process the delete
+router.get("/delete", (req, res, next) => {
+  let high = req.query?.HighPrice;
+  let low = req.query?.LowPrice;
+  let productName = req.query?.Productnamedelete;
+
+  if (productName) {
+    product.deleteOne({ Productname: productName }, (err) => {
+      if (err) {
+        console.error(err);
+        res.end(err);
+      } else {
+        res.redirect("/products");
+      }
+    });
+  } else {
+    product.deleteMany({ Price: { $gte: low, $lt: high } }, (err) => {
+      if (err) {
+        console.error(err);
+        res.end(err);
+      } else {
+        res.redirect("/products");
+      }
+    });
+  }
+});
+
 // GET the Product Details page in order to edit an existing Product
 router.get("/:id", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
   let id = req.params.id;
   product.findById(id, (err, productToEdit) => {
     if (err) {
@@ -91,13 +115,6 @@ router.post("/:id", (req, res, next) => {
       res.redirect("/products");
     }
   });
-});
-
-// GET - process the delete
-router.get("/delete", (req, res, next) => {
-  /*****************
-   * ADD CODE HERE *
-   *****************/
 });
 
 module.exports = router;
