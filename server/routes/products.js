@@ -1,3 +1,8 @@
+/*products.ejs
+Milankumar Chhaganbhai Khunt
+301245415
+28/10/2022
+*/
 // modules required for routing
 let express = require("express");
 let router = express.Router();
