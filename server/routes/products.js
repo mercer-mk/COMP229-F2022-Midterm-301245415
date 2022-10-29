@@ -58,9 +58,9 @@ router.post("/add", (req, res, next) => {
 
 // GET - process the delete
 router.get("/delete", (req, res, next) => {
-  let high = req.query?.HighPrice;
-  let low = req.query?.LowPrice;
-  let productName = req.query?.Productnamedelete;
+  let high = req.query.HighPrice;
+  let low = req.query.LowPrice;
+  let productName = req.query.Productnamedelete;
 
   if (productName) {
     product.deleteOne({ Productname: productName }, (err) => {
